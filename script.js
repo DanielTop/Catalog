@@ -6,7 +6,7 @@ const CONFIG = {
     renderUrl: (repoName) => `https://${repoName.replace(/_/g, '-')}.onrender.com`,
 
     // Репозитории-исключения (не игры или внешние)
-    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop', 'bomberman'],
+    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop', 'bomberman', 'bomberman-online'],
 
     // Кастомные иконки для игр (по имени репо)
     icons: {
@@ -39,13 +39,13 @@ const CONFIG = {
     // Внешние игры (не из GitHub репозиториев)
     externalGames: [
         {
-            id: 'bomberman',
-            name: 'Bomberman',
-            description: 'Классический Bomberman онлайн с мультиплеером',
+            id: 'bomberman-online',
+            name: 'Bomberman Online',
+            description: 'Классический Bomberman на двоих! Ставь бомбы, собирай powerups, взрывай противника. Кооп/PvP в реальном времени.',
             url: 'https://bomberman-production-829f.up.railway.app',
             icon: '💣',
-            modes: ['Online', 'Multiplayer'],
-            created: '2024-12-26T00:00:00Z',
+            modes: ['2 Players', 'Online', 'PvP'],
+            created: '2024-12-28T00:00:00Z',
             updated: '2024-12-28T00:00:00Z'
         }
     ]
