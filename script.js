@@ -31,7 +31,7 @@ const CONFIG = {
         'stick-online': ['Online'],
         'age_of_wars': ['2 Players', 'Local'],
         'age-of-wars': ['2 Players', 'Local'],
-        'bomberman-online': ['2 Players', 'Online', 'PvP'],
+        'bomberman-online': ['2 Players', 'Local', 'PvP'],
         'zombie-coop': ['2 Players', 'Online', 'Co-op'],
         'zombie_coop': ['2 Players', 'Online', 'Co-op'],
     },
@@ -172,6 +172,11 @@ const gamesGrid = document.getElementById('games-grid');
 const loading = document.getElementById('loading');
 const errorDiv = document.getElementById('error');
 const catalog = document.getElementById('catalog');
+const filterBar = document.getElementById('filter-bar');
+
+// Состояние фильтра
+let allGames = [];
+let currentFilter = 'all';
 const gameContainer = document.getElementById('game-container');
 const gameFrame = document.getElementById('game-frame');
 const gameTitle = document.getElementById('game-title');
@@ -213,28 +218,81 @@ async function loadGames() {
             return;
         }
 
-        // Отображаем карточки игр из GitHub
-        gameRepos.forEach(repo => {
-            const game = {
-                id: repo.name,
-                name: formatGameName(repo.name),
-                description: repo.description || CONFIG.descriptions[repo.name] || 'Web game',
-                url: CONFIG.customUrls?.[repo.name] || CONFIG.renderUrl(repo.name),
-                icon: CONFIG.icons[repo.name] || CONFIG.icons.default,
-                modes: CONFIG.modes[repo.name] || ['Solo'],
-                created: repo.created_at,
-                updated: repo.updated_at
-            };
+        // Собираем все игры
+        allGames = gameRepos.map(repo => ({
+            id: repo.name,
+            name: formatGameName(repo.name),
+            description: repo.description || CONFIG.descriptions[repo.name] || 'Web game',
+            url: CONFIG.customUrls?.[repo.name] || CONFIG.renderUrl(repo.name),
+            icon: CONFIG.icons[repo.name] || CONFIG.icons.default,
+            modes: CONFIG.modes[repo.name] || ['Solo'],
+            created: repo.created_at,
+            updated: repo.updated_at
+        }));
 
-            const card = createGameCard(game);
-            gamesGrid.appendChild(card);
+        // Собираем уникальные теги
+        const allTags = new Set();
+        allGames.forEach(game => {
+            game.modes.forEach(mode => allTags.add(mode));
         });
+
+        // Создаём кнопки фильтров
+        buildFilterButtons(Array.from(allTags));
+
+        // Отображаем игры
+        renderGames(allGames);
 
     } catch (error) {
         console.error('Error loading games:', error);
         loading.style.display = 'none';
         errorDiv.style.display = 'block';
     }
+}
+
+// Создание кнопок фильтров
+function buildFilterButtons(tags) {
+    filterBar.innerHTML = '<button class="filter-btn active" data-filter="all">All</button>';
+
+    tags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = tag;
+        btn.textContent = tag;
+        filterBar.appendChild(btn);
+    });
+
+    // Обработчики кликов
+    filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+            applyFilter();
+        });
+    });
+}
+
+// Применение фильтра
+function applyFilter() {
+    if (currentFilter === 'all') {
+        renderGames(allGames);
+    } else {
+        const filtered = allGames.filter(game => game.modes.includes(currentFilter));
+        renderGames(filtered);
+    }
+}
+
+// Отрисовка игр
+function renderGames(games) {
+    gamesGrid.innerHTML = '';
+    if (games.length === 0) {
+        gamesGrid.innerHTML = '<div class="empty-state"><p>No games found</p></div>';
+        return;
+    }
+    games.forEach(game => {
+        const card = createGameCard(game);
+        gamesGrid.appendChild(card);
+    });
 }
 
 // Обрезать описание до короткого
