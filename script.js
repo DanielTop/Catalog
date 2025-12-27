@@ -12,6 +12,8 @@ const CONFIG = {
     icons: {
         'stick_online': '⚔️',
         'stick-online': '⚔️',
+        'age_of_wars': '🏰',
+        'age-of-wars': '🏰',
         'default': '🎮'
     },
 
@@ -19,12 +21,16 @@ const CONFIG = {
     tags: {
         'stick_online': ['MMO', 'PvP', 'RPG'],
         'stick-online': ['MMO', 'PvP', 'RPG'],
+        'age_of_wars': ['Strategy', 'Tower Defense'],
+        'age-of-wars': ['Strategy', 'Tower Defense'],
     },
 
     // Описания игр (если нет в GitHub)
     descriptions: {
         'stick_online': 'MMO игра с открытым миром в стиле стик-фигур',
         'stick-online': 'MMO игра с открытым миром в стиле стик-фигур',
+        'age_of_wars': 'Стратегия с эпохами от каменного века до будущего',
+        'age-of-wars': 'Стратегия с эпохами от каменного века до будущего',
     }
 };
 
