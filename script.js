@@ -5,8 +5,13 @@ const CONFIG = {
     // Паттерн URL для Render (имя репо -> URL)
     renderUrl: (repoName) => `https://${repoName.replace(/_/g, '-')}.onrender.com`,
 
-    // Репозитории-исключения (не игры или внешние)
-    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop', 'bomberman', 'bomberman-online'],
+    // Репозитории-исключения (не игры)
+    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop'],
+
+    // Кастомные URL (переопределяют Render URL)
+    customUrls: {
+        'bomberman-online': 'https://bomberman-production-829f.up.railway.app'
+    },
 
     // Кастомные иконки для игр (по имени репо)
     icons: {
@@ -14,7 +19,7 @@ const CONFIG = {
         'stick-online': '⚔️',
         'age_of_wars': '🏰',
         'age-of-wars': '🏰',
-        'bomberman': '💣',
+        'bomberman-online': '💣',
         'default': '🎮'
     },
 
@@ -24,7 +29,7 @@ const CONFIG = {
         'stick-online': ['Online'],
         'age_of_wars': ['2 Players', 'Local'],
         'age-of-wars': ['2 Players', 'Local'],
-        'bomberman': ['Online', 'Multiplayer'],
+        'bomberman-online': ['2 Players', 'Online', 'PvP'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -33,22 +38,7 @@ const CONFIG = {
         'stick-online': 'MMO игра с открытым миром в стиле стик-фигур',
         'age_of_wars': 'Стратегия с эпохами от каменного века до будущего',
         'age-of-wars': 'Стратегия с эпохами от каменного века до будущего',
-        'bomberman': 'Классический Bomberman онлайн с мультиплеером',
-    },
-
-    // Внешние игры (не из GitHub репозиториев)
-    externalGames: [
-        {
-            id: 'bomberman-online',
-            name: 'Bomberman Online',
-            description: 'Классический Bomberman на двоих! Ставь бомбы, собирай powerups, взрывай противника. Кооп/PvP в реальном времени.',
-            url: 'https://bomberman-production-829f.up.railway.app',
-            icon: '💣',
-            modes: ['2 Players', 'Online', 'PvP'],
-            created: '2024-12-28T00:00:00Z',
-            updated: '2024-12-28T00:00:00Z'
-        }
-    ]
+    }
 };
 
 // Система глобальных лайков (Upstash Redis)
@@ -225,7 +215,7 @@ async function loadGames() {
                 id: repo.name,
                 name: formatGameName(repo.name),
                 description: repo.description || CONFIG.descriptions[repo.name] || 'Web game',
-                url: CONFIG.renderUrl(repo.name),
+                url: CONFIG.customUrls?.[repo.name] || CONFIG.renderUrl(repo.name),
                 icon: CONFIG.icons[repo.name] || CONFIG.icons.default,
                 modes: CONFIG.modes[repo.name] || ['Solo'],
                 created: repo.created_at,
@@ -235,14 +225,6 @@ async function loadGames() {
             const card = createGameCard(game);
             gamesGrid.appendChild(card);
         });
-
-        // Добавляем внешние игры
-        if (CONFIG.externalGames && CONFIG.externalGames.length > 0) {
-            CONFIG.externalGames.forEach(game => {
-                const card = createGameCard(game);
-                gamesGrid.appendChild(card);
-            });
-        }
 
     } catch (error) {
         console.error('Error loading games:', error);
