@@ -12,7 +12,7 @@ const CONFIG = {
     customUrls: {
         'bomberman-online': 'https://bomberman-production-829f.up.railway.app',
         'zombie-coop': 'https://app-production-41c4.up.railway.app',
-        'artillery-wars': 'https://artillery-wars-production.up.railway.app'
+        'artillery-wars': 'https://app-production-5b65.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
