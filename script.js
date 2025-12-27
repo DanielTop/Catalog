@@ -33,8 +33,8 @@ const CONFIG = {
     modes: {
         'stick_online': ['Online'],
         'stick-online': ['Online'],
-        'age_of_wars': ['2 Players', 'Online', 'PvP'],
-        'age-of-wars': ['2 Players', 'Online', 'PvP'],
+        'age_of_wars': ['Solo', '2 Players', 'Online', 'Local'],
+        'age-of-wars': ['Solo', '2 Players', 'Online', 'Local'],
         'bomberman-online': ['2 Players', 'Local', 'PvP'],
         'zombie-coop': ['2 Players', 'Local', 'Co-op'],
         'zombie_coop': ['2 Players', 'Local', 'Co-op'],
