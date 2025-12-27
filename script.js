@@ -5,8 +5,8 @@ const CONFIG = {
     // Паттерн URL для Render (имя репо -> URL)
     renderUrl: (repoName) => `https://${repoName.replace(/_/g, '-')}.onrender.com`,
 
-    // Репозитории-исключения (не игры)
-    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop'],
+    // Репозитории-исключения (не игры или внешние)
+    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop', 'bomberman'],
 
     // Кастомные иконки для игр (по имени репо)
     icons: {
