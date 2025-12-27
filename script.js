@@ -33,8 +33,8 @@ const CONFIG = {
         'age_of_wars': ['2 Players', 'Local'],
         'age-of-wars': ['2 Players', 'Local'],
         'bomberman-online': ['2 Players', 'Local', 'PvP'],
-        'zombie-coop': ['2 Players', 'Online', 'Co-op'],
-        'zombie_coop': ['2 Players', 'Online', 'Co-op'],
+        'zombie-coop': ['2 Players', 'Local', 'Co-op'],
+        'zombie_coop': ['2 Players', 'Local', 'Co-op'],
     },
 
     // Описания игр (если нет в GitHub)
