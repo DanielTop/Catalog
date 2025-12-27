@@ -174,10 +174,12 @@ const loading = document.getElementById('loading');
 const errorDiv = document.getElementById('error');
 const catalog = document.getElementById('catalog');
 const filterBar = document.getElementById('filter-bar');
+const sortSelect = document.getElementById('sort-select');
 
-// Состояние фильтра
+// Состояние фильтра и сортировки
 let allGames = [];
 let currentFilter = 'all';
+let currentSort = 'updated';
 const gameContainer = document.getElementById('game-container');
 const gameFrame = document.getElementById('game-frame');
 const gameTitle = document.getElementById('game-title');
@@ -240,8 +242,8 @@ async function loadGames() {
         // Создаём кнопки фильтров
         buildFilterButtons(Array.from(allTags));
 
-        // Отображаем игры
-        renderGames(allGames);
+        // Отображаем игры с сортировкой
+        applyFilterAndSort();
 
     } catch (error) {
         console.error('Error loading games:', error);
@@ -268,19 +270,50 @@ function buildFilterButtons(tags) {
             filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentFilter = btn.dataset.filter;
-            applyFilter();
+            applyFilterAndSort();
         });
     });
 }
 
-// Применение фильтра
-function applyFilter() {
-    if (currentFilter === 'all') {
-        renderGames(allGames);
-    } else {
-        const filtered = allGames.filter(game => game.modes.includes(currentFilter));
-        renderGames(filtered);
+// Обработчик сортировки
+sortSelect.addEventListener('change', () => {
+    currentSort = sortSelect.value;
+    applyFilterAndSort();
+});
+
+// Применение фильтра и сортировки
+function applyFilterAndSort() {
+    let games = [...allGames];
+
+    // Фильтрация
+    if (currentFilter !== 'all') {
+        games = games.filter(game => game.modes.includes(currentFilter));
     }
+
+    // Сортировка
+    games = sortGames(games, currentSort);
+
+    renderGames(games);
+}
+
+// Сортировка игр
+function sortGames(games, sortBy) {
+    return [...games].sort((a, b) => {
+        switch (sortBy) {
+            case 'name':
+                return a.name.localeCompare(b.name);
+            case 'created':
+                return new Date(b.created) - new Date(a.created);
+            case 'updated':
+                return new Date(b.updated) - new Date(a.updated);
+            case 'likes':
+                return (Likes.get(b.id).count || 0) - (Likes.get(a.id).count || 0);
+            case 'views':
+                return (Views.get(b.id) || 0) - (Views.get(a.id) || 0);
+            default:
+                return 0;
+        }
+    });
 }
 
 // Отрисовка игр

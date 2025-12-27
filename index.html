@@ -15,8 +15,21 @@
                 <p class="subtitle">Games by DanielTop</p>
             </header>
 
-            <div id="filter-bar" class="filter-bar">
-                <button class="filter-btn active" data-filter="all">All</button>
+            <div class="controls">
+                <div id="filter-bar" class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                </div>
+
+                <div id="sort-bar" class="sort-bar">
+                    <span class="sort-label">Sort:</span>
+                    <select id="sort-select" class="sort-select">
+                        <option value="updated">Updated</option>
+                        <option value="created">Created</option>
+                        <option value="name">Name</option>
+                        <option value="likes">Likes</option>
+                        <option value="views">Views</option>
+                    </select>
+                </div>
             </div>
 
             <div id="games-grid" class="games-grid">

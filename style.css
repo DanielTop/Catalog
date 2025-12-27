@@ -41,13 +41,57 @@ header h1 {
     font-size: 1.1rem;
 }
 
+/* Контролы (фильтр + сортировка) */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
 /* Фильтр по тегам */
 .filter-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-bottom: 30px;
+}
+
+/* Сортировка */
+.sort-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-label {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.sort-select {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+    background: rgba(0, 217, 255, 0.1);
+    border-color: rgba(0, 217, 255, 0.3);
+}
+
+.sort-select option {
+    background: #1a1a2e;
+    color: #fff;
 }
 
 .filter-btn {
