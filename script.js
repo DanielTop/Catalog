@@ -14,6 +14,7 @@ const CONFIG = {
         'stick-online': '⚔️',
         'age_of_wars': '🏰',
         'age-of-wars': '🏰',
+        'bomberman': '💣',
         'default': '🎮'
     },
 
@@ -23,6 +24,7 @@ const CONFIG = {
         'stick-online': ['Online'],
         'age_of_wars': ['2 Players', 'Local'],
         'age-of-wars': ['2 Players', 'Local'],
+        'bomberman': ['Online', 'Multiplayer'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -31,7 +33,22 @@ const CONFIG = {
         'stick-online': 'MMO игра с открытым миром в стиле стик-фигур',
         'age_of_wars': 'Стратегия с эпохами от каменного века до будущего',
         'age-of-wars': 'Стратегия с эпохами от каменного века до будущего',
-    }
+        'bomberman': 'Классический Bomberman онлайн с мультиплеером',
+    },
+
+    // Внешние игры (не из GitHub репозиториев)
+    externalGames: [
+        {
+            id: 'bomberman',
+            name: 'Bomberman',
+            description: 'Классический Bomberman онлайн с мультиплеером',
+            url: 'https://bomberman-production-829f.up.railway.app',
+            icon: '💣',
+            modes: ['Online', 'Multiplayer'],
+            created: '2024-12-26T00:00:00Z',
+            updated: '2024-12-28T00:00:00Z'
+        }
+    ]
 };
 
 // Система глобальных лайков (Upstash Redis)
@@ -202,7 +219,7 @@ async function loadGames() {
             return;
         }
 
-        // Отображаем карточки игр
+        // Отображаем карточки игр из GitHub
         gameRepos.forEach(repo => {
             const game = {
                 id: repo.name,
@@ -218,6 +235,14 @@ async function loadGames() {
             const card = createGameCard(game);
             gamesGrid.appendChild(card);
         });
+
+        // Добавляем внешние игры
+        if (CONFIG.externalGames && CONFIG.externalGames.length > 0) {
+            CONFIG.externalGames.forEach(game => {
+                const card = createGameCard(game);
+                gamesGrid.appendChild(card);
+            });
+        }
 
     } catch (error) {
         console.error('Error loading games:', error);
