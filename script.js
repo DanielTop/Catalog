@@ -12,7 +12,8 @@ const CONFIG = {
     customUrls: {
         'bomberman-online': 'https://bomberman-production-829f.up.railway.app',
         'zombie-coop': 'https://app-production-41c4.up.railway.app',
-        'artillery-wars': 'https://app-production-5b65.up.railway.app'
+        'artillery-wars': 'https://app-production-5b65.up.railway.app',
+        'age_of_wars': 'https://app-production-d482.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -32,8 +33,8 @@ const CONFIG = {
     modes: {
         'stick_online': ['Online'],
         'stick-online': ['Online'],
-        'age_of_wars': ['2 Players', 'Local'],
-        'age-of-wars': ['2 Players', 'Local'],
+        'age_of_wars': ['2 Players', 'Online', 'PvP'],
+        'age-of-wars': ['2 Players', 'Online', 'PvP'],
         'bomberman-online': ['2 Players', 'Local', 'PvP'],
         'zombie-coop': ['2 Players', 'Local', 'Co-op'],
         'zombie_coop': ['2 Players', 'Local', 'Co-op'],
