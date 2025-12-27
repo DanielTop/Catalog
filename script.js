@@ -10,7 +10,8 @@ const CONFIG = {
 
     // Кастомные URL (переопределяют Render URL)
     customUrls: {
-        'bomberman-online': 'https://bomberman-production-829f.up.railway.app'
+        'bomberman-online': 'https://bomberman-production-829f.up.railway.app',
+        'zombie-coop': 'https://app-production-41c4.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
