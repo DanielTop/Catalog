@@ -11,7 +11,8 @@ const CONFIG = {
     // Кастомные URL (переопределяют Render URL)
     customUrls: {
         'bomberman-online': 'https://bomberman-production-829f.up.railway.app',
-        'zombie-coop': 'https://app-production-41c4.up.railway.app'
+        'zombie-coop': 'https://app-production-41c4.up.railway.app',
+        'artillery-wars': 'https://artillery-wars-production.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -23,6 +24,7 @@ const CONFIG = {
         'bomberman-online': '💣',
         'zombie-coop': '🧟',
         'zombie_coop': '🧟',
+        'artillery-wars': '💥',
         'default': '🎮'
     },
 
@@ -35,6 +37,7 @@ const CONFIG = {
         'bomberman-online': ['2 Players', 'Local', 'PvP'],
         'zombie-coop': ['2 Players', 'Local', 'Co-op'],
         'zombie_coop': ['2 Players', 'Local', 'Co-op'],
+        'artillery-wars': ['3 Players', 'Online', 'PvP'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -43,6 +46,7 @@ const CONFIG = {
         'stick-online': 'MMO игра с открытым миром в стиле стик-фигур',
         'age_of_wars': 'Стратегия с эпохами от каменного века до будущего',
         'age-of-wars': 'Стратегия с эпохами от каменного века до будущего',
+        'artillery-wars': 'Real-time танковые бои на 3 игрока с разных устройств. 4 типа оружия!',
     }
 };
 
