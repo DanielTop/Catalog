@@ -17,12 +17,12 @@ const CONFIG = {
         'default': '🎮'
     },
 
-    // Кастомные теги для игр
-    tags: {
-        'stick_online': ['MMO', 'PvP', 'RPG'],
-        'stick-online': ['MMO', 'PvP', 'RPG'],
-        'age_of_wars': ['Strategy', 'Tower Defense'],
-        'age-of-wars': ['Strategy', 'Tower Defense'],
+    // Режим игры (онлайн/вдвоём/соло)
+    modes: {
+        'stick_online': ['Online'],
+        'stick-online': ['Online'],
+        'age_of_wars': ['Solo'],
+        'age-of-wars': ['Solo'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -210,9 +210,8 @@ async function loadGames() {
                 description: repo.description || CONFIG.descriptions[repo.name] || 'Web game',
                 url: CONFIG.renderUrl(repo.name),
                 icon: CONFIG.icons[repo.name] || CONFIG.icons.default,
-                tags: CONFIG.tags[repo.name] || [],
-                stars: repo.stargazers_count,
-                language: repo.language,
+                modes: CONFIG.modes[repo.name] || ['Solo'],
+                created: repo.created_at,
                 updated: repo.updated_at
             };
 
@@ -242,12 +241,8 @@ function createGameCard(game) {
     card.className = 'game-card';
     card.dataset.gameId = game.id;
 
-    const tagsHtml = game.tags.length > 0
-        ? `<div class="game-tags">${game.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
-        : '';
-
-    const langBadge = game.language
-        ? `<span class="lang-badge">${game.language}</span>`
+    const modesHtml = game.modes.length > 0
+        ? `<div class="game-modes">${game.modes.map(m => `<span class="mode-tag">${m}</span>`).join('')}</div>`
         : '';
 
     const likeData = Likes.get(game.id);
@@ -258,12 +253,13 @@ function createGameCard(game) {
     card.innerHTML = `
         <div class="game-preview">${game.icon}</div>
         <div class="game-info">
-            <div class="game-header-row">
-                <h3>${game.name}</h3>
-                ${langBadge}
-            </div>
+            <h3>${game.name}</h3>
             <p class="game-description">${shortDesc}</p>
-            ${tagsHtml}
+            ${modesHtml}
+            <div class="game-dates">
+                <span>📅 ${formatDate(game.created)}</span>
+                <span>🔄 ${formatDate(game.updated)}</span>
+            </div>
             <div class="game-footer">
                 <button class="like-btn ${likedClass}" data-game-id="${game.id}">
                     <span class="like-icon">${likeData.liked ? '❤️' : '🤍'}</span>

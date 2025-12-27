@@ -80,26 +80,26 @@ header h1 {
     min-height: 180px;
 }
 
-.game-header-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-}
-
 .game-info h3 {
     font-size: 1.2rem;
     color: #fff;
-    margin: 0;
+    margin: 0 0 8px 0;
 }
 
-.lang-badge {
-    padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    font-size: 0.7rem;
-    color: #aaa;
-    text-transform: uppercase;
+.game-modes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.mode-tag {
+    padding: 4px 10px;
+    background: rgba(0, 255, 136, 0.15);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: #00ff88;
 }
 
 .game-description {
@@ -111,6 +111,20 @@ header h1 {
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex: 1;
+}
+
+.game-dates {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.game-dates span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .game-footer {
