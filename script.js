@@ -21,8 +21,8 @@ const CONFIG = {
     modes: {
         'stick_online': ['Online'],
         'stick-online': ['Online'],
-        'age_of_wars': ['Solo'],
-        'age-of-wars': ['Solo'],
+        'age_of_wars': ['2 Players', 'Local'],
+        'age-of-wars': ['2 Players', 'Local'],
     },
 
     // Описания игр (если нет в GitHub)
