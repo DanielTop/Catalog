@@ -34,9 +34,10 @@ const CONFIG = {
     }
 };
 
-// Система глобальных лайков (локальный сервер)
+// Система глобальных лайков (Upstash Redis)
 const Likes = {
-    API_URL: '/api/likes',
+    REDIS_URL: 'https://innocent-marten-55337.upstash.io',
+    REDIS_TOKEN: 'AdgpAAIncDEyNmQ2MjE3MDA2OTY0ZWRiYjU1MDk3NWZkODI1MjBhY3AxNTUzMzc',
     LOCAL_KEY: 'my_liked_games',
     cache: null,
 
@@ -52,10 +53,28 @@ const Likes = {
         return this.getMyLikes().includes(gameId);
     },
 
+    async redisCommand(command) {
+        const response = await fetch(`${this.REDIS_URL}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${this.REDIS_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(command)
+        });
+        return response.json();
+    },
+
     async fetchAll() {
         try {
-            const response = await fetch(this.API_URL);
-            this.cache = await response.json();
+            const result = await this.redisCommand(['HGETALL', 'likes']);
+            // Redis возвращает [key1, val1, key2, val2, ...]
+            this.cache = {};
+            if (result.result && Array.isArray(result.result)) {
+                for (let i = 0; i < result.result.length; i += 2) {
+                    this.cache[result.result[i]] = parseInt(result.result[i + 1]) || 0;
+                }
+            }
             return this.cache;
         } catch (error) {
             console.error('Failed to fetch likes:', error);
@@ -83,22 +102,57 @@ const Likes = {
             this.setMyLikes(myLikes);
         }
 
-        // Отправляем на сервер
+        // Отправляем в Redis
         try {
-            const response = await fetch(this.API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ gameId, delta })
-            });
-            this.cache = await response.json();
+            const result = await this.redisCommand(['HINCRBY', 'likes', gameId, delta]);
+            const newCount = Math.max(0, result.result || 0);
+            if (!this.cache) this.cache = {};
+            this.cache[gameId] = newCount;
+            return { count: newCount, liked: !isLiked };
         } catch (error) {
             console.error('Failed to save like:', error);
-            // Локальный fallback
             if (!this.cache) this.cache = {};
             this.cache[gameId] = Math.max(0, (this.cache[gameId] || 0) + delta);
+            return { count: this.cache[gameId], liked: !isLiked };
         }
+    }
+};
 
-        return { count: this.cache[gameId] || 0, liked: !isLiked };
+// Счётчик заходов в игры (Upstash Redis)
+const Views = {
+    cache: null,
+
+    async fetchAll() {
+        try {
+            const result = await Likes.redisCommand(['HGETALL', 'views']);
+            this.cache = {};
+            if (result.result && Array.isArray(result.result)) {
+                for (let i = 0; i < result.result.length; i += 2) {
+                    this.cache[result.result[i]] = parseInt(result.result[i + 1]) || 0;
+                }
+            }
+            return this.cache;
+        } catch (error) {
+            console.error('Failed to fetch views:', error);
+            this.cache = {};
+            return {};
+        }
+    },
+
+    get(gameId) {
+        return this.cache?.[gameId] || 0;
+    },
+
+    async increment(gameId) {
+        try {
+            const result = await Likes.redisCommand(['HINCRBY', 'views', gameId, 1]);
+            if (!this.cache) this.cache = {};
+            this.cache[gameId] = result.result || 0;
+            return this.cache[gameId];
+        } catch (error) {
+            console.error('Failed to increment views:', error);
+            return this.cache?.[gameId] || 0;
+        }
     }
 };
 
@@ -120,9 +174,10 @@ async function loadGames() {
     gamesGrid.innerHTML = '';
 
     try {
-        // Загружаем лайки параллельно с репозиториями
-        const [likesData, reposResponse] = await Promise.all([
+        // Загружаем лайки, просмотры и репозитории параллельно
+        const [likesData, viewsData, reposResponse] = await Promise.all([
             Likes.fetchAll(),
+            Views.fetchAll(),
             fetch(`https://api.github.com/users/${CONFIG.username}/repos?sort=updated&per_page=100`)
         ]);
 
@@ -198,6 +253,7 @@ function createGameCard(game) {
     const likeData = Likes.get(game.id);
     const likedClass = likeData.liked ? 'liked' : '';
     const shortDesc = truncateDescription(game.description);
+    const viewsCount = Views.get(game.id);
 
     card.innerHTML = `
         <div class="game-preview">${game.icon}</div>
@@ -214,7 +270,7 @@ function createGameCard(game) {
                     <span class="like-count">${likeData.count}</span>
                 </button>
                 <div class="game-meta">
-                    <span>⭐ ${game.stars}</span>
+                    <span>👁 ${viewsCount}</span>
                 </div>
             </div>
         </div>
@@ -256,13 +312,16 @@ function formatDate(dateString) {
 }
 
 // Открытие игры
-function openGame(game) {
+async function openGame(game) {
     catalog.style.display = 'none';
     gameContainer.style.display = 'flex';
 
     gameTitle.textContent = game.name;
     gameFrame.src = game.url;
     fullscreenBtn.href = game.url;
+
+    // Увеличиваем счётчик просмотров
+    Views.increment(game.id);
 
     history.pushState({ game: game }, '', `?game=${game.id}`);
 }
