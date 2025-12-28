@@ -15,7 +15,8 @@ const CONFIG = {
         'artillery-wars': 'https://app-production-5b65.up.railway.app',
         'age_of_wars': 'https://app-production-d482.up.railway.app',
         'quest-rpg': 'https://app-production-1f3f.up.railway.app',
-        'blobby-volley-online': 'https://app-production-3080.up.railway.app'
+        'blobby-volley-online': 'https://app-production-3080.up.railway.app',
+        'fnf-online': 'https://app-production-c299.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -30,6 +31,7 @@ const CONFIG = {
         'artillery-wars': '💥',
         'quest-rpg': '⚔️',
         'blobby-volley-online': '🏐',
+        'fnf-online': '🎤',
         'default': '🎮'
     },
 
@@ -45,6 +47,7 @@ const CONFIG = {
         'artillery-wars': ['3 Players', 'Online', 'PvP'],
         'quest-rpg': ['Solo', 'RPG'],
         'blobby-volley-online': ['Solo', '2 Players', 'Online', 'PvP'],
+        'fnf-online': ['2 Players', 'Online', 'PvP', 'Rhythm'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -56,6 +59,7 @@ const CONFIG = {
         'artillery-wars': 'Real-time танковые бои на 3 игрока с разных устройств. 4 типа оружия!',
         'quest-rpg': 'Классическая RPG: квесты от короля, пошаговые бои, магазин, прокачка!',
         'blobby-volley-online': 'Волейбол с блобами: играй против CPU, локально вдвоём или онлайн!',
+        'fnf-online': 'Friday Night Funkin Online: ритм-баттлы 1 на 1! Boyfriend, Pico, Tankman и другие!',
     }
 };
 
