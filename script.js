@@ -14,7 +14,8 @@ const CONFIG = {
         'zombie-coop': 'https://app-production-41c4.up.railway.app',
         'artillery-wars': 'https://app-production-5b65.up.railway.app',
         'age_of_wars': 'https://app-production-d482.up.railway.app',
-        'quest-rpg': 'https://app-production-1f3f.up.railway.app'
+        'quest-rpg': 'https://app-production-1f3f.up.railway.app',
+        'blobby-volley-online': 'https://app-production-3080.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -28,6 +29,7 @@ const CONFIG = {
         'zombie_coop': '🧟',
         'artillery-wars': '💥',
         'quest-rpg': '⚔️',
+        'blobby-volley-online': '🏐',
         'default': '🎮'
     },
 
@@ -42,6 +44,7 @@ const CONFIG = {
         'zombie_coop': ['2 Players', 'Local', 'Co-op'],
         'artillery-wars': ['3 Players', 'Online', 'PvP'],
         'quest-rpg': ['Solo', 'RPG'],
+        'blobby-volley-online': ['Solo', '2 Players', 'Online', 'PvP'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -52,6 +55,7 @@ const CONFIG = {
         'age-of-wars': 'Стратегия с эпохами от каменного века до будущего',
         'artillery-wars': 'Real-time танковые бои на 3 игрока с разных устройств. 4 типа оружия!',
         'quest-rpg': 'Классическая RPG: квесты от короля, пошаговые бои, магазин, прокачка!',
+        'blobby-volley-online': 'Волейбол с блобами: играй против CPU, локально вдвоём или онлайн!',
     }
 };
 
