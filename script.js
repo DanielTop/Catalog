@@ -6,7 +6,7 @@ const CONFIG = {
     renderUrl: (repoName) => `https://${repoName.replace(/_/g, '-')}.onrender.com`,
 
     // Репозитории-исключения (не игры)
-    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop'],
+    excludeRepos: ['Catalog', 'DanielTop.github.io', 'DanielTop', 'xsor2-online'],
 
     // Кастомные URL (переопределяют Render URL)
     customUrls: {
