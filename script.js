@@ -13,7 +13,8 @@ const CONFIG = {
         'bomberman-online': 'https://bomberman-production-829f.up.railway.app',
         'zombie-coop': 'https://app-production-41c4.up.railway.app',
         'artillery-wars': 'https://app-production-5b65.up.railway.app',
-        'age_of_wars': 'https://app-production-d482.up.railway.app'
+        'age_of_wars': 'https://app-production-d482.up.railway.app',
+        'xsor2-online': 'https://app-production-f048.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -26,6 +27,7 @@ const CONFIG = {
         'zombie-coop': '🧟',
         'zombie_coop': '🧟',
         'artillery-wars': '💥',
+        'xsor2-online': '👊',
         'default': '🎮'
     },
 
@@ -39,6 +41,7 @@ const CONFIG = {
         'zombie-coop': ['2 Players', 'Local', 'Co-op'],
         'zombie_coop': ['2 Players', 'Local', 'Co-op'],
         'artillery-wars': ['3 Players', 'Online', 'PvP'],
+        'xsor2-online': ['3 Players', 'Online', 'Co-op', 'Beat em up'],
     },
 
     // Описания игр (если нет в GitHub)
