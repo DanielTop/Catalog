@@ -444,8 +444,10 @@ function createGameCard(game) {
             <h3>${game.name}</h3>
             <p class="game-description">${shortDesc}</p>
             ${modesHtml}
+            <div class="game-author">
+                <span class="author-badge author-${game.author.toLowerCase()}">${game.author}</span>
+            </div>
             <div class="game-dates">
-                <span>👤 ${game.author}</span>
                 <span>📅 ${formatDate(game.created)}</span>
                 <span>🔄 ${formatDate(game.updated)}</span>
             </div>
