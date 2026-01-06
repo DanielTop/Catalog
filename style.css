@@ -117,6 +117,29 @@ header h1 {
     color: #00d9ff;
 }
 
+.filter-separator {
+    color: #444;
+    font-size: 1.2rem;
+    padding: 0 5px;
+}
+
+.author-btn {
+    background: rgba(255, 200, 100, 0.05);
+    border-color: rgba(255, 200, 100, 0.15);
+}
+
+.author-btn:hover {
+    background: rgba(255, 200, 100, 0.15);
+    border-color: rgba(255, 200, 100, 0.3);
+    color: #ffc864;
+}
+
+.author-btn.active {
+    background: rgba(255, 200, 100, 0.2);
+    border-color: #ffc864;
+    color: #ffc864;
+}
+
 /* Сетка игр */
 .games-grid {
     display: grid;

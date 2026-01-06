@@ -72,6 +72,16 @@ const CONFIG = {
         'flappy-mannequin': 'Flappy Bird с манекеном — уворачивайся от препятствий!',
         'sticktube': 'Стикмен-платформер в стиле видеохостинга',
         'plant-vs-zombies': 'Растения против Зомби: защити дом от орды зомби!',
+    },
+
+    // Авторы игр (по умолчанию Larry)
+    authors: {
+        'sticktube': 'Daniel',
+        'flappy-mannequin': 'Daniel',
+        'stick_online': 'Daniel',
+        'stick-online': 'Daniel',
+        'fnf-online': 'Daniel',
+        'default': 'Larry'
     }
 };
 
@@ -208,6 +218,7 @@ const sortSelect = document.getElementById('sort-select');
 // Состояние фильтра и сортировки
 let allGames = [];
 let currentFilter = 'all';
+let currentAuthor = 'all';
 let currentSort = 'updated';
 const gameContainer = document.getElementById('game-container');
 const gameFrame = document.getElementById('game-frame');
@@ -258,6 +269,7 @@ async function loadGames() {
             url: CONFIG.customUrls?.[repo.name] || CONFIG.renderUrl(repo.name),
             icon: CONFIG.icons[repo.name] || CONFIG.icons.default,
             modes: CONFIG.modes[repo.name] || ['Solo'],
+            author: CONFIG.authors[repo.name] || CONFIG.authors.default,
             created: repo.created_at,
             updated: repo.updated_at
         }));
@@ -268,8 +280,14 @@ async function loadGames() {
             game.modes.forEach(mode => allTags.add(mode));
         });
 
+        // Собираем уникальных авторов
+        const allAuthors = new Set();
+        allGames.forEach(game => {
+            allAuthors.add(game.author);
+        });
+
         // Создаём кнопки фильтров
-        buildFilterButtons(Array.from(allTags));
+        buildFilterButtons(Array.from(allTags), Array.from(allAuthors));
 
         // Отображаем игры с сортировкой
         applyFilterAndSort();
@@ -282,7 +300,7 @@ async function loadGames() {
 }
 
 // Создание кнопок фильтров
-function buildFilterButtons(tags) {
+function buildFilterButtons(tags, authors) {
     filterBar.innerHTML = '<button class="filter-btn active" data-filter="all">All</button>';
 
     tags.forEach(tag => {
@@ -293,12 +311,43 @@ function buildFilterButtons(tags) {
         filterBar.appendChild(btn);
     });
 
-    // Обработчики кликов
-    filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+    // Добавляем разделитель и фильтры по авторам
+    const separator = document.createElement('span');
+    separator.className = 'filter-separator';
+    separator.textContent = '|';
+    filterBar.appendChild(separator);
+
+    // Кнопка "All Authors"
+    const allAuthorsBtn = document.createElement('button');
+    allAuthorsBtn.className = 'filter-btn author-btn active';
+    allAuthorsBtn.dataset.author = 'all';
+    allAuthorsBtn.textContent = '👤 All';
+    filterBar.appendChild(allAuthorsBtn);
+
+    authors.forEach(author => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn author-btn';
+        btn.dataset.author = author;
+        btn.textContent = `👤 ${author}`;
+        filterBar.appendChild(btn);
+    });
+
+    // Обработчики кликов для тегов
+    filterBar.querySelectorAll('.filter-btn:not(.author-btn)').forEach(btn => {
         btn.addEventListener('click', () => {
-            filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            filterBar.querySelectorAll('.filter-btn:not(.author-btn)').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentFilter = btn.dataset.filter;
+            applyFilterAndSort();
+        });
+    });
+
+    // Обработчики кликов для авторов
+    filterBar.querySelectorAll('.author-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBar.querySelectorAll('.author-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentAuthor = btn.dataset.author;
             applyFilterAndSort();
         });
     });
@@ -314,9 +363,14 @@ sortSelect.addEventListener('change', () => {
 function applyFilterAndSort() {
     let games = [...allGames];
 
-    // Фильтрация
+    // Фильтрация по режиму
     if (currentFilter !== 'all') {
         games = games.filter(game => game.modes.includes(currentFilter));
+    }
+
+    // Фильтрация по автору
+    if (currentAuthor !== 'all') {
+        games = games.filter(game => game.author === currentAuthor);
     }
 
     // Сортировка
@@ -339,6 +393,8 @@ function sortGames(games, sortBy) {
                 return (Likes.get(b.id).count || 0) - (Likes.get(a.id).count || 0);
             case 'views':
                 return (Views.get(b.id) || 0) - (Views.get(a.id) || 0);
+            case 'author':
+                return a.author.localeCompare(b.author);
             default:
                 return 0;
         }
@@ -389,6 +445,7 @@ function createGameCard(game) {
             <p class="game-description">${shortDesc}</p>
             ${modesHtml}
             <div class="game-dates">
+                <span>👤 ${game.author}</span>
                 <span>📅 ${formatDate(game.created)}</span>
                 <span>🔄 ${formatDate(game.updated)}</span>
             </div>
