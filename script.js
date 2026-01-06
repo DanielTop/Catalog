@@ -16,7 +16,9 @@ const CONFIG = {
         'age_of_wars': 'https://app-production-d482.up.railway.app',
         'quest-rpg': 'https://app-production-1f3f.up.railway.app',
         'blobby-volley-online': 'https://app-production-3080.up.railway.app',
-        'fnf-online': 'https://app-production-c299.up.railway.app'
+        'fnf-online': 'https://app-production-c299.up.railway.app',
+        'flappy-mannequin': 'https://flappy-mannequin-production.up.railway.app',
+        'sticktube': 'https://sticktube-copy-production.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -32,6 +34,8 @@ const CONFIG = {
         'quest-rpg': '⚔️',
         'blobby-volley-online': '🏐',
         'fnf-online': '🎤',
+        'flappy-mannequin': '🪂',
+        'sticktube': '📺',
         'default': '🎮'
     },
 
@@ -48,6 +52,8 @@ const CONFIG = {
         'quest-rpg': ['Solo', 'RPG'],
         'blobby-volley-online': ['Solo', '2 Players', 'Online', 'PvP'],
         'fnf-online': ['2 Players', 'Online', 'PvP', 'Rhythm'],
+        'flappy-mannequin': ['Solo'],
+        'sticktube': ['Solo'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -60,6 +66,8 @@ const CONFIG = {
         'quest-rpg': 'Классическая RPG: квесты от короля, пошаговые бои, магазин, прокачка!',
         'blobby-volley-online': 'Волейбол с блобами: играй против CPU, локально вдвоём или онлайн!',
         'fnf-online': 'Friday Night Funkin Online: ритм-баттлы 1 на 1! Boyfriend, Pico, Tankman и другие!',
+        'flappy-mannequin': 'Flappy Bird с манекеном — уворачивайся от препятствий!',
+        'sticktube': 'Стикмен-платформер в стиле видеохостинга',
     }
 };
 
