@@ -18,7 +18,8 @@ const CONFIG = {
         'blobby-volley-online': 'https://app-production-3080.up.railway.app',
         'fnf-online': 'https://app-production-c299.up.railway.app',
         'flappy-mannequin': 'https://flappy-mannequin-production.up.railway.app',
-        'sticktube': 'https://sticktube-copy-production.up.railway.app'
+        'sticktube': 'https://sticktube-copy-production.up.railway.app',
+        'plant-vs-zombies': 'https://plant-vs-zombies-production.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -36,6 +37,7 @@ const CONFIG = {
         'fnf-online': '🎤',
         'flappy-mannequin': '🪂',
         'sticktube': '📺',
+        'plant-vs-zombies': '🌻',
         'default': '🎮'
     },
 
@@ -54,6 +56,7 @@ const CONFIG = {
         'fnf-online': ['2 Players', 'Online', 'PvP', 'Rhythm'],
         'flappy-mannequin': ['Solo'],
         'sticktube': ['Solo'],
+        'plant-vs-zombies': ['Solo', 'Strategy'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -68,6 +71,7 @@ const CONFIG = {
         'fnf-online': 'Friday Night Funkin Online: ритм-баттлы 1 на 1! Boyfriend, Pico, Tankman и другие!',
         'flappy-mannequin': 'Flappy Bird с манекеном — уворачивайся от препятствий!',
         'sticktube': 'Стикмен-платформер в стиле видеохостинга',
+        'plant-vs-zombies': 'Растения против Зомби: защити дом от орды зомби!',
     }
 };
 
