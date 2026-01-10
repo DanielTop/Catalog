@@ -21,7 +21,8 @@ const CONFIG = {
         'flappy-mannequin': 'https://flappy-mannequin-production.up.railway.app',
         'sticktube': 'https://sticktube-copy-production.up.railway.app',
         'plant-vs-zombies': 'https://plant-vs-zombies-production.up.railway.app',
-        'dodgeball-game': 'https://dodgeball-game-production.up.railway.app'
+        'dodgeball-game': 'https://dodgeball-game-production.up.railway.app',
+        'fishing-game': 'https://fishing-game-production.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
@@ -42,6 +43,7 @@ const CONFIG = {
         'sticktube': '📺',
         'plant-vs-zombies': '🌻',
         'dodgeball-game': '🏐',
+        'fishing-game': '🎣',
         'default': '🎮'
     },
 
@@ -63,6 +65,7 @@ const CONFIG = {
         'sticktube': ['Solo'],
         'plant-vs-zombies': ['Solo', 'Strategy'],
         'dodgeball-game': ['Solo', 'Online', '4 Players', 'PvP'],
+        'fishing-game': ['Solo'],
     },
 
     // Описания игр (если нет в GitHub)
@@ -80,6 +83,7 @@ const CONFIG = {
         'sticktube': 'Стикмен-платформер в стиле видеохостинга',
         'plant-vs-zombies': 'Растения против Зомби: защити дом от орды зомби!',
         'dodgeball-game': 'Вышибалы онлайн! До 5 игроков, играй с ботами или друзьями. Новогодняя версия!',
+        'fishing-game': 'Рыбалка! Лови рыбу и получай очки!',
     },
 
     // Авторы игр (по умолчанию Larry)
@@ -91,6 +95,7 @@ const CONFIG = {
         'stick-online': 'Daniel',
         'fnf-online': 'Daniel',
         'dodgeball-game': 'Daniel',
+        'fishing-game': 'Daniel',
         'default': 'Larry'
     }
 };
