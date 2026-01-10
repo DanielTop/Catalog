@@ -21,7 +21,7 @@ const CONFIG = {
         'flappy-mannequin': 'https://flappy-mannequin-production.up.railway.app',
         'sticktube': 'https://sticktube-copy-production.up.railway.app',
         'plant-vs-zombies': 'https://plant-vs-zombies-production.up.railway.app',
-        'dodgeball-game': 'https://dodgeball-online-production.up.railway.app'
+        'dodgeball-game': 'https://dodgeball-game-production.up.railway.app'
     },
 
     // Кастомные иконки для игр (по имени репо)
