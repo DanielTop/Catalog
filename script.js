@@ -10,6 +10,7 @@ const CONFIG = {
 
     // Кастомные URL (переопределяют Render URL)
     customUrls: {
+        'circle-adventure': 'https://circle-adventure-production.up.railway.app',
         'bomberman-online': 'https://bomberman-production-829f.up.railway.app',
         'zombie-coop': 'https://app-production-41c4.up.railway.app',
         'artillery-wars': 'https://app-production-5b65.up.railway.app',
@@ -24,6 +25,7 @@ const CONFIG = {
 
     // Кастомные иконки для игр (по имени репо)
     icons: {
+        'circle-adventure': '🔵',
         'stick_online': '⚔️',
         'stick-online': '⚔️',
         'age_of_wars': '🏰',
@@ -43,6 +45,7 @@ const CONFIG = {
 
     // Режим игры (онлайн/вдвоём/соло)
     modes: {
+        'circle-adventure': ['Solo', 'Platformer'],
         'stick_online': ['Online'],
         'stick-online': ['Online'],
         'age_of_wars': ['Solo', '2 Players', 'Online', 'Local'],
@@ -61,6 +64,7 @@ const CONFIG = {
 
     // Описания игр (если нет в GitHub)
     descriptions: {
+        'circle-adventure': '30 уровней платформер! Собирай монеты, открывай двери. 3 скина: Classic, Among Us, Hornet',
         'stick_online': 'MMO игра с открытым миром в стиле стик-фигур',
         'stick-online': 'MMO игра с открытым миром в стиле стик-фигур',
         'age_of_wars': 'Стратегия с эпохами от каменного века до будущего',
@@ -76,6 +80,7 @@ const CONFIG = {
 
     // Авторы игр (по умолчанию Larry)
     authors: {
+        'circle-adventure': 'Daniel',
         'sticktube': 'Daniel',
         'flappy-mannequin': 'Daniel',
         'stick_online': 'Daniel',
